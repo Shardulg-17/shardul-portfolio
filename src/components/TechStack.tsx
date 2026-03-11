@@ -11,18 +11,39 @@ import {
   RapierRigidBody,
 } from "@react-three/rapier";
 
-const textureLoader = new THREE.TextureLoader();
-const imageUrls = [
-  "/images/react2.webp",
-  "/images/next2.webp",
-  "/images/node2.webp",
-  "/images/express.webp",
-  "/images/mongo.webp",
-  "/images/mysql.webp",
-  "/images/typescript.webp",
-  "/images/javascript.webp",
+const texts = [
+  "SEO",
+  "PPC",
+  "Analytics",
+  "Content",
+  "SMM",
+  "CRM",
+  "Ads",
+  "Strategy",
+  "QA Testing",
+  "Automation",
+  "Teaching",
+  "Mentoring"
 ];
-const textures = imageUrls.map((url) => textureLoader.load(url));
+
+const createTextTexture = (text: string) => {
+  const canvas = document.createElement("canvas");
+  canvas.width = 512;
+  canvas.height = 512;
+  const context = canvas.getContext("2d");
+  if (context) {
+    context.fillStyle = "#ffffff";
+    context.fillRect(0, 0, 512, 512);
+    context.fillStyle = "#000000";
+    context.font = "bold 80px Arial";
+    context.textAlign = "center";
+    context.textBaseline = "middle";
+    context.fillText(text, 256, 256);
+  }
+  return new THREE.CanvasTexture(canvas);
+};
+
+const textures = texts.map(createTextTexture);
 
 const sphereGeometry = new THREE.SphereGeometry(1, 28, 28);
 
@@ -168,7 +189,7 @@ const TechStack = () => {
 
   return (
     <div className="techstack">
-      <h2> My Techstack</h2>
+      <h2> My Core Skills</h2>
 
       <Canvas
         shadows

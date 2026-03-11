@@ -87,22 +87,20 @@ const WhatIDo = () => {
             <div className="what-corner"></div>
 
             <div className="what-content-in">
-              <h3>FRONTEND</h3>
-              <h4>Building Interactive UIs</h4>
+              <h3>SEO & STRATEGY</h3>
+              <h4>Driving Online Visibility</h4>
               <p>
-                Crafting performant, responsive interfaces with modern frameworks.
-                From SPAs to micro-frontends, I deliver pixel-perfect experiences.
+                Develop and execute SEO and digital marketing strategies to increase website
+                traffic, search rankings, and online visibility. Manage performance marketing
+                campaigns to generate leads and improve conversion rates.
               </p>
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">React.js</div>
-                <div className="what-tags">Angular</div>
-                <div className="what-tags">Next.js</div>
-                <div className="what-tags">TypeScript</div>
-                <div className="what-tags">JavaScript</div>
-                <div className="what-tags">Material UI</div>
-                <div className="what-tags">HTML5</div>
-                <div className="what-tags">CSS3</div>
+                <div className="what-tags">SEO / SEM</div>
+                <div className="what-tags">PPC Campaigns</div>
+                <div className="what-tags">Social Media</div>
+                <div className="what-tags">Content Marketing</div>
+                <div className="what-tags">Keyword Research</div>
               </div>
               <div className="what-arrow"></div>
             </div>
@@ -126,22 +124,19 @@ const WhatIDo = () => {
             </div>
             <div className="what-corner"></div>
             <div className="what-content-in">
-              <h3>BACKEND</h3>
-              <h4>Scalable Server Architecture</h4>
+              <h3>MARKETING ANALYTICS</h3>
+              <h4>Performance Optimization</h4>
               <p>
-                Designing robust APIs and microservices. From CMS platforms to
-                complex business logic, I build backends that scale.
+                Analyze marketing data and campaign performance using analytics tools
+                to optimize strategies and maximize ROI.
               </p>
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">Node.js</div>
-                <div className="what-tags">NestJS</div>
-                <div className="what-tags">Express.js</div>
-                <div className="what-tags">MongoDB</div>
-                <div className="what-tags">PostgreSQL</div>
-                <div className="what-tags">REST APIs</div>
-                <div className="what-tags">Microservices</div>
-                <div className="what-tags">Python</div>
+                <div className="what-tags">Google Analytics</div>
+                <div className="what-tags">Data Analysis</div>
+                <div className="what-tags">ROI Tracking</div>
+                <div className="what-tags">A/B Testing</div>
+                <div className="what-tags">Conversion Rate Optimization</div>
               </div>
               <div className="what-arrow"></div>
             </div>
