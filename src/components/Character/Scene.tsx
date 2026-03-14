@@ -17,7 +17,7 @@ const Scene = () => {
   const canvasDiv = useRef<HTMLDivElement | null>(null);
   const hoverDivRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef(new THREE.Scene());
-  const { setLoading } = useLoading();
+  const { setLoading, setIsLoading } = useLoading();
 
   const [character, setChar] = useState<THREE.Object3D | null>(null);
   useEffect(() => {
@@ -53,27 +53,31 @@ const Scene = () => {
       let progress = setProgress((value) => setLoading(value));
       const { loadCharacter } = setCharacter(renderer, scene, camera);
 
-      loadCharacter().then((gltf) => {
-        if (gltf) {
-          const animations = setAnimations(gltf);
-          hoverDivRef.current && animations.hover(gltf, hoverDivRef.current);
-          mixer = animations.mixer;
-          let character = gltf.scene;
-          setChar(character);
-          scene.add(character);
-          headBone = character.getObjectByName("spine006") || null;
-          screenLight = character.getObjectByName("screenlight") || null;
-          progress.loaded().then(() => {
-            setTimeout(() => {
+      loadCharacter()
+        .then((gltf) => {
+          if (gltf) {
+            const animations = setAnimations(gltf);
+            hoverDivRef.current && animations.hover(gltf, hoverDivRef.current);
+            mixer = animations.mixer;
+            let character = gltf.scene;
+            setChar(character);
+            scene.add(character);
+            headBone = character.getObjectByName("spine006") || null;
+            screenLight = character.getObjectByName("screenlight") || null;
+            progress.loaded().then(() => {
+              // Trigger lights and intro immediately after loading completes.
               light.turnOnLights();
               animations.startIntro();
-            }, 2500);
-          });
-          window.addEventListener("resize", () =>
-            handleResize(renderer, camera, canvasDiv, character)
-          );
-        }
-      });
+            });
+            window.addEventListener("resize", () =>
+              handleResize(renderer, camera, canvasDiv, character)
+            );
+          }
+        })
+        .catch((error) => {
+          console.error("Character load failed:", error);
+          setIsLoading(false);
+        });
 
       let mouse = { x: 0, y: 0 },
         interpolation = { x: 0.1, y: 0.2 };
@@ -81,7 +85,7 @@ const Scene = () => {
       const onMouseMove = (event: MouseEvent) => {
         handleMouseMove(event, (x, y) => (mouse = { x, y }));
       };
-      let debounce: number | undefined;
+      let debounce: ReturnType<typeof setTimeout> | undefined;
       const onTouchStart = (event: TouchEvent) => {
         const element = event.target as HTMLElement;
         debounce = setTimeout(() => {

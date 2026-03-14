@@ -10,28 +10,43 @@ const Loading = ({ percent }: { percent: number }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [clicked, setClicked] = useState(false);
 
-  if (percent >= 100) {
-    setTimeout(() => {
-      setLoaded(true);
-      setTimeout(() => {
-        setIsLoaded(true);
-      }, 1000);
-    }, 600);
-  }
+  useEffect(() => {
+    if (percent < 100) return;
+
+    const t1 = window.setTimeout(() => setLoaded(true), 250);
+    const t2 = window.setTimeout(() => setIsLoaded(true), 450);
+
+    return () => {
+      window.clearTimeout(t1);
+      window.clearTimeout(t2);
+    };
+  }, [percent]);
+
+  // Safety fallback: if loading takes unusually long, force hide after 15s
+  useEffect(() => {
+    const timeout = window.setTimeout(() => {
+      setIsLoading(false);
+    }, 15000);
+
+    return () => window.clearTimeout(timeout);
+  }, [setIsLoading]);
 
   useEffect(() => {
-    import("./utils/initialFX").then((module) => {
-      if (isLoaded) {
-        setClicked(true);
-        setTimeout(() => {
-          if (module.initialFX) {
-            module.initialFX();
-          }
-          setIsLoading(false);
-        }, 900);
-      }
-    });
-  }, [isLoaded]);
+    if (!isLoaded) return;
+
+    setClicked(true);
+
+    const timeout = window.setTimeout(() => {
+      import("./utils/initialFX").then((module) => {
+        if (module.initialFX) {
+          module.initialFX();
+        }
+        setIsLoading(false);
+      });
+    }, 200);
+
+    return () => window.clearTimeout(timeout);
+  }, [isLoaded, setIsLoading]);
 
   function handleMouseMove(e: React.MouseEvent<HTMLElement>) {
     const { currentTarget: target } = e;

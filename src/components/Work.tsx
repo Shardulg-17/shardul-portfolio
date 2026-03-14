@@ -34,6 +34,18 @@ const projects = [
     tools: "React.js, Node.js, Microservices",
     image: "/images/Maxlife.png",
   },
+  {
+    title: "Express API Platform",
+    category: "Backend Services",
+    tools: "Node.js, Express, REST APIs",
+    image: "/images/express.webp",
+  },
+  {
+    title: "JavaScript Utility Suite",
+    category: "Dev Productivity",
+    tools: "JavaScript, Automation, Tooling",
+    image: "/images/javascript.webp",
+  },
 ];
 
 const Work = () => {
