@@ -19,8 +19,7 @@ const setLighting = (scene: THREE.Scene) => {
   scene.add(pointLight);
 
   new RGBELoader()
-    .setPath("/models/")
-    .load("char_enviorment.hdr?v=2", function (texture) {
+    .load(new URL("models/char_enviorment.hdr?v=2", import.meta.env.BASE_URL).href, function (texture) {
       texture.mapping = THREE.EquirectangularReflectionMapping;
       scene.environment = texture;
       scene.environmentIntensity = 0;
